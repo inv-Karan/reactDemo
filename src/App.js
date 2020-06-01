@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import DetailsKaran from './details'
+import WC from '../src/welcome'
+import TY from '../src/thankyou'
+import CT from '../src/count'
+import DCT from '../src/decount'
+import FRM from '../src/form'
 
-function App() {
+class App extends Component{
+  constructor(){
+    super()
+    this.state = {
+      isShow: false
+    }
+  }
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WC name={'karan'} />
+      <WC name={'karan1'} />
+      <WC name={'karan1fdsf'} />
+      ------
+      <DetailsKaran></DetailsKaran>
+      ------
+      <TY name={'karan'}/>
+      ----------
+      <CT />
+      -------
+      <DCT />
+      -------
+      <button onClick={() => {this.setState({isShow: !this.state.isShow})}}>Toggle form </button>
+      {this.state.isShow ? <FRM /> : null}
     </div>
   );
+  }
 }
 
 export default App;
