@@ -6,18 +6,19 @@ import TY from '../src/thankyou'
 import CT from '../src/count'
 import DCT from '../src/decount'
 import FRM from '../src/form'
+import ToDo from './todo/main'
 
 class App extends Component{
   constructor(){
     super()
-    this.state = {
-      isShow: false
-    }
+    // this.state = {
+    //   isShow: false
+    // }
   }
   render(){
   return (
     <div className="App">
-      <WC name={'karan'} />
+      {/* <WC name={'karan'} />
       <WC name={'karan1'} />
       <WC name={'karan1fdsf'} />
       ------
@@ -30,7 +31,8 @@ class App extends Component{
       <DCT />
       -------
       <button onClick={() => {this.setState({isShow: !this.state.isShow})}}>Toggle form </button>
-      {this.state.isShow ? <FRM /> : null}
+      {this.state.isShow ? <FRM /> : null} */}
+      <ToDo />
     </div>
   );
   }
