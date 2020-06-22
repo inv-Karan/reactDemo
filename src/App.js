@@ -6,7 +6,8 @@ import TY from '../src/thankyou'
 import CT from '../src/count'
 import DCT from '../src/decount'
 import FRM from '../src/form'
-import ToDo from './todo/main'
+import ToDo from './todo/main1'
+import BMS from './todo/main'
 
 class App extends Component{
   constructor(){
@@ -17,7 +18,7 @@ class App extends Component{
   }
   render(){
   return (
-    <div className="App">
+    <div className="App container--fluid">
       {/* <WC name={'karan'} />
       <WC name={'karan1'} />
       <WC name={'karan1fdsf'} />
@@ -32,7 +33,8 @@ class App extends Component{
       -------
       <button onClick={() => {this.setState({isShow: !this.state.isShow})}}>Toggle form </button>
       {this.state.isShow ? <FRM /> : null} */}
-      <ToDo />
+      {/* <ToDo /> */}
+      <BMS />
     </div>
   );
   }
