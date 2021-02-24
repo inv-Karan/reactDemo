@@ -1,25 +1,35 @@
-// Import required AWS SDK clients and commands for Node.js
-const { SNSClient, PublishCommand } =  require("@aws-sdk/client-sns")
+const express = require('express');
+const app = express();
+require('dotenv').config();
 
-// Set the AWS Region
-const REGION = "ap-south-1"; //e.g. "us-east-1"
+var AWS = require('aws-sdk');
 
-// Set the parameters
-var params = {
-  Message: "HI", // MESSAGE_TEXT
-  TopicArn: "+919099178011", //TOPIC_ARN
-};
+app.get('/', (req, res) => {
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
+    console.log("Message = " + req.query.message);
+    console.log("Number = " + req.query.number);
+    console.log("Subject = " + req.query.subject);
+    var params = {
+        Message: req.query.message,
+        PhoneNumber: '+' + req.query.number,
+        MessageAttributes: {
+            'AWS.SNS.SMS.SenderID': {
+                'DataType': 'String',
+                'StringValue': req.query.subject
+            }
+        }
+    };
 
-const run = async () => {
-  try {
-    const data = await sns.send(new PublishCommand(params));
-    console.log("Message sent to the topic");
-    console.log("MessageID is " + data.MessageId);
-  } catch (err) {
-    console.error(err, err.stack);
-  }
-};
-run();
+    var publishTextPromise = new AWS.SNS({ apiVersion: '2010-03-31' }).publish(params).promise();
+
+    publishTextPromise.then(
+        function (data) {
+            res.end(JSON.stringify({ MessageID: data.MessageId }));
+        }).catch(
+            function (err) {
+                res.end(JSON.stringify({ Error: err }));
+            });
+
+});
+
+app.listen(3000, () => console.log('SMS Service Listening on PORT 3000'))
